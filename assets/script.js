@@ -10,12 +10,21 @@ function writePassword() {
   var passwordLength = prompt("How long would you like the password length to be?");
   if (passwordLength === null || passwordLength.trim() === "") {
     return;
-}
+  }
   passwordLength = Number(passwordLength);
+  if (!Number.isInteger(passwordLength) || passwordLength < 8 || passwordLength > 128){
+   alert("Please put a vaild password length between 8 and 128.");
+   return; 
+  }
   var uselowercase = confirm("Include lowercase lettters?")
-  var uppercase = confirm("Include uppercase lettters?")
+  var useuppercase = confirm("Include uppercase lettters?")
   var usenumbers = confirm("Include numbers?")
   var usesybols = confirm("Include Sybols")
+
+  if (!uselowercase && !usenumbers && !useuppercase && !usesybols){
+   alert("Please select one or more character type");
+   return; 
+  }
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
@@ -25,3 +34,6 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+function generatePassword(length, uselowercase, useuppercase, usenumbers, usesybols){
+  var charset
+}
