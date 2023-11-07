@@ -35,5 +35,24 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 function generatePassword(length, uselowercase, useuppercase, usenumbers, usesybols){
-  var charset
+  var charset = "";
+
+  if (uselowercase) {
+    charset += lowercaseChars;
+  }
+  if (useuppercase) {
+    charset += uppercaseChars;
+  }
+  if (usenumbers) {
+    charset += numbersChars;
+  }
+  if (usesybols) {
+    charset += sybolsChars;
+  }
+  var password = "";
+  for (var i = 0; i < length; i++){
+    var randomIndex = Math.floor(Math.random() * charset.length);
+    password += charset.charAt(randomIndex)
+  }
+  return password;
 }
