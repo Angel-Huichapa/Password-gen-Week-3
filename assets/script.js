@@ -1,10 +1,12 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-// added the requirements for the password
-var lowercase = "abcdefghijklmnopqrstuvwxyz";
-var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var numbers = "0123456789";
-var sybols = "!@#$%^&*()_+";
+
+// requirements for the password
+var lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+var uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var numbersChars = "0123456789";
+var symbolsChars = "!@#$%^&*()_+";
+
 // Write password to the #password input
 function writePassword() {
   var passwordLength = prompt("How long would you like the password length to be?");
@@ -12,47 +14,47 @@ function writePassword() {
     return;
   }
   passwordLength = Number(passwordLength);
-  if (!Number.isInteger(passwordLength) || passwordLength < 8 || passwordLength > 128){
-   alert("Please put a vaild password length between 8 and 128.");
-   return; 
+  if (!Number.isInteger(passwordLength) || passwordLength < 8 || passwordLength > 128) {
+    alert("Please enter a valid password length between 8 and 128.");
+    return;
   }
-  var uselowercase = confirm("Include lowercase lettters?")
-  var useuppercase = confirm("Include uppercase lettters?")
-  var usenumbers = confirm("Include numbers?")
-  var usesybols = confirm("Include Sybols")
+  var useLowercase = confirm("Include lowercase letters?");
+  var useUppercase = confirm("Include uppercase letters?");
+  var useNumbers = confirm("Include numbers?");
+  var useSymbols = confirm("Include symbols?");
 
-  if (!uselowercase && !usenumbers && !useuppercase && !usesybols){
-   alert("Please select one or more character type");
-   return; 
+  if (!useLowercase && !useNumbers && !useUppercase && !useSymbols) {
+    alert("Please select one or more character types.");
+    return;
   }
-  var password = generatePassword();
+  var password = generatePassword(passwordLength, useLowercase, useUppercase, useNumbers, useSymbols);
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-function generatePassword(length, uselowercase, useuppercase, usenumbers, usesybols){
+
+function generatePassword(length, useLowercase, useUppercase, useNumbers, useSymbols) {
   var charset = "";
 
-  if (uselowercase) {
+  if (useLowercase) {
     charset += lowercaseChars;
   }
-  if (useuppercase) {
+  if (useUppercase) {
     charset += uppercaseChars;
   }
-  if (usenumbers) {
+  if (useNumbers) {
     charset += numbersChars;
   }
-  if (usesybols) {
-    charset += sybolsChars;
+  if (useSymbols) {
+    charset += symbolsChars;
   }
+
   var password = "";
-  for (var i = 0; i < length; i++){
+  for (var i = 0; i < length; i++) {
     var randomIndex = Math.floor(Math.random() * charset.length);
-    password += charset.charAt(randomIndex)
+    password += charset.charAt(randomIndex);
   }
   return password;
 }
