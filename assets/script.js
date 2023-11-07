@@ -50,7 +50,10 @@ function generatePassword(length, useLowercase, useUppercase, useNumbers, useSym
   if (useSymbols) {
     charset += symbolsChars;
   }
-
+  if (charset === ""){
+    alert("Please select at least one character type");
+    return "No characters selected.";
+  }
   var password = "";
   for (var i = 0; i < length; i++) {
     var randomIndex = Math.floor(Math.random() * charset.length);
